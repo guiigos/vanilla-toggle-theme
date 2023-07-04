@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Toggle Theme</title>
+
+  <style type="text/css">
+    :root {
+      --border-size: 0.25rem;
+      --border-radius: 2rem;
+
+      --font-size: 2rem;
+    }
+
+    [data-theme="light"] {
+      --color-bg: #ffffff;
+      --color-fg: #000000;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #000000;
+      --color-fg: #ffffff;
+    }
+
+    body {
+      color: var(--color-fg);
+      background-color: var(--color-bg);
+
+      height: 100vh;
+
+      display: grid;
+      place-items: center;
+    }
+
+    button {
+      color: var(--color-fg);
+      background-color: var(--color-bg);
+
+      border-radius: var(--border-radius);
+      border: var(--border-size) solid var(--color-fg);
+      font-size: var(--font-size);
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button type="button" data-theme-toggle>Change</button>
+
+  <script lang="javascript" type="text/javascript" charset="UTF-8">
+    const STORAGE_KEY = "theme";
+
+    const html = document.querySelector("html");
+    const button = document.querySelector("[data-theme-toggle]");
+
+    const changeTheme = new Map([
+      ["dark", "light"],
+      ["light", "dark"],
+    ]);
+
+    const localStorageTheme = localStorage.getItem(STORAGE_KEY);
+    if (!!localStorageTheme) {
+      html.setAttribute("data-theme", localStorageTheme);
+    }
+
+    button.addEventListener("click", function (event) {
+      const current = html.getAttribute("data-theme");
+      const changed = changeTheme.get(current);
+
+      localStorage.setItem(STORAGE_KEY, changed);
+      html.setAttribute("data-theme", changed);
+    });
+  </script>
+</body>
+</html>
