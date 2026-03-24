@@ -7,3 +7,5 @@ This is a simple project that demonstrates how to create a toggle theme function
 - **HTML**
 - **CSS**
 - **JavaScript**
+
+[![License: MIT](https://img.shields.io/github/license/guiigos/node-express-async?style=flat-square)](./LICENSE)
